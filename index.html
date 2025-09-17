@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construtor de App Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .panel { display: none; }
+        .panel.active { display: block; }
+        .nav-link.active { background-color: #eef2ff; color: #4338ca; }
+        /* Animação de fade-in para os painéis */
+        .panel {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Estilo para o scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+    <div class="flex flex-col h-screen">
+        <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        
+        <!-- Menu Lateral de Navegação -->
+        <aside class="w-full lg:w-1/5 bg-white border-r border-gray-200 p-6 overflow-y-auto">
+            <h1 class="text-2xl font-bold text-indigo-600 mb-6">Construtor de App</h1>
+            <nav id="navigation">
+                 <a href="#ideia-central" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2 active" data-target="ideia-central">💡 Ideia Central</a>
+                <a href="#forms" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="forms">1. Formulários e Edição</a>
+                <a href="#store-management" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="store-management">2. Gestão de Lojas</a>
+                <a href="#ads" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="ads">3. Anúncios e Publicidade</a>
+                <a href="#plans" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="plans">4. Planos e Assinaturas</a>
+                <a href="#users" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="users">5. Gestão de Usuários</a>
+                <a href="#search" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="search">6. Busca e Navegação</a>
+                <a href="#layout" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="layout">7. Layout e Design</a>
+                <a href="#advanced" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="advanced">8. Outras Categorias</a>
+                <a href="#general-structure" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="general-structure">9. Estrutura Geral</a>
+            </nav>
+        </aside>
+
+        <!-- Painel Central de Opções -->
+        <main class="w-full lg:w-2/5 p-8 overflow-y-auto bg-gray-50">
+            <div id="panels-container">
+                <!-- Painel Ideia Central -->
+                <div id="ideia-central-panel" class="panel active">
+                    <h2 class="text-3xl font-bold mb-6">💡 Ideia Central e Objetivo</h2>
+                    <div class="space-y-6 bg-white p-6 rounded-lg shadow">
+                        <div>
+                            <label for="app-name" class="block text-lg font-medium text-gray-700 mb-2">Qual é o nome do aplicativo?</label>
+                            <input type="text" id="app-name" name="app-name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Ex: Marketplace Conecta">
+                            <p class="text-sm text-gray-500 mt-1">O nome que aparecerá no título do projeto.</p>
+                        </div>
+                        <div>
+                            <label for="app-goal" class="block text-lg font-medium text-gray-700 mb-2">Qual é o principal objetivo do aplicativo?</label>
+                            <textarea id="app-goal" name="app-goal" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Ex: Conectar artesãos locais a compradores interessados em produtos únicos."></textarea>
+                            <p class="text-sm text-gray-500 mt-1">Descreva em poucas palavras o que ele resolve ou faz.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Painel Formulários -->
+                <div id="forms-panel" class="panel">
+                    <h2 class="text-3xl font-bold mb-6">1. Formulários e Edição (CRUD)</h2>
+                    <div class="space-y-4 bg-white p-6 rounded-lg shadow">
+                        <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Formulários de Autenticação" data-preview="auth-forms" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Formulários de Autenticação (Login, Registro, Recuperar Senha)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Perfis e Contas" data-preview="profile-forms" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Perfis e Contas (Editar Perfil, Alterar Senha, Upload de Avatar)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Gestão de Loja" data-preview="store-forms" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Gestão de Loja (Criar/Editar Loja, Upload de Imagens)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Gestão de Produtos" data-preview="product-forms" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Gestão de Produtos (Adicionar/Editar Produto, Variantes)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Financeiro" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Financeiro (Dados Bancários, Métodos de Pagamento)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Painel Gestão de Lojas -->
+                <div id="store-management-panel" class="panel">
+                    <h2 class="text-3xl font-bold mb-6">2. Gestão de Lojas e Produtos</h2>
+                    <div class="space-y-4 bg-white p-6 rounded-lg shadow">
+                        <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Painel do Lojista" data-preview="seller-dashboard" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Painel do Lojista (Visão geral de vendas, produtos, estoque)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Catálogo de Produtos" data-preview="product-catalog" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Catálogo (Gerenciamento de categorias e coleções)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Controle de Estoque" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Controle de Estoque (Alerta de baixo estoque, atualização em lote)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Reviews e Avaliações" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Reviews e Avaliações (Aprovar/Excluir comentários, responder)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Gestão de Pedidos" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Gestão de Pedidos (Histórico, status de entrega, reembolso)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Painel Anúncios -->
+                <div id="ads-panel" class="panel">
+                    <h2 class="text-3xl font-bold mb-6">3. Anúncios e Publicidade</h2>
+                    <div class="space-y-4 bg-white p-6 rounded-lg shadow">
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Gerenciamento de Anúncios" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Gerenciamento de Anúncios (Criar, Editar, Pausar, Excluir)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Formatos de Publicidade" data-preview="ad-formats" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Formatos de Publicidade (Banner rotativo, Destaques, Carrossel)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Métricas e Análises de Anúncios" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Métricas e Análises (Impressões, Cliques, Conversões)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Painel Planos -->
+                <div id="plans-panel" class="panel">
+                    <h2 class="text-3xl font-bold mb-6">4. Planos e Assinaturas</h2>
+                    <div class="space-y-4 bg-white p-6 rounded-lg shadow">
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Planos Básicos e Premium" data-preview="plans-pricing" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Página de Planos (Básicos e Premium, com limites e benefícios)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Assinatura Recorrente" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Assinatura Recorrente (Cartão, PIX, PayPal)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Gestão de Faturas" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Gestão de Faturas (Histórico de pagamentos, download de notas)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Upgrades/Downgrades e Cupons" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Upgrades, Downgrades, Testes Gratuitos e Cupons</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Painel Usuários -->
+                <div id="users-panel" class="panel">
+                    <h2 class="text-3xl font-bold mb-6">5. Gestão de Usuários e Administração</h2>
+                    <div class="space-y-4 bg-white p-6 rounded-lg shadow">
+                        <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Admin Dashboard" data-preview="admin-dashboard" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Admin Dashboard (Estatísticas gerais, usuários ativos, lojas)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Controle de Permissões" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Controle de Permissões (Admin, Lojista, Cliente, Moderador)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Aprovação de Conteúdo" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Workflow de Aprovação (Lojistas, Produtos, Anúncios)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Suporte ao Cliente" data-preview="support-system" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Suporte ao Cliente (Sistema de tickets, chat)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Painel Busca -->
+                <div id="search-panel" class="panel">
+                    <h2 class="text-3xl font-bold mb-6">6. Busca e Navegação</h2>
+                     <div class="space-y-4 bg-white p-6 rounded-lg shadow">
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Busca Simples e Avançada" data-preview="search-bar" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Busca Simples e Avançada (Filtros por categoria, preço, rating)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Sugestões em Tempo Real" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Sugestões em Tempo Real (Autocomplete)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Carrosséis de Destaques" data-preview="carousels" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Carrosséis de Destaques (Produtos populares, mais vendidos)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Geolocalização e Mapas" data-preview="geolocation" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Geolocalização (Mostrar lojas no mapa)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Painel Layout -->
+                <div id="layout-panel" class="panel">
+                    <h2 class="text-3xl font-bold mb-6">7. Layout e Design</h2>
+                    <div class="space-y-6 bg-white p-6 rounded-lg shadow">
+                        <div>
+                            <label class="block text-lg font-medium text-gray-700 mb-2">Cores</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label for="primary-color" class="block text-sm font-medium text-gray-600">Cor Primária</label>
+                                    <input type="color" id="primary-color" name="primary-color" value="#4f46e5" class="w-full h-10 border border-gray-300 rounded-lg cursor-pointer">
+                                </div>
+                                <div>
+                                    <label for="secondary-color" class="block text-sm font-medium text-gray-600">Cor Secundária</label>
+                                    <input type="color" id="secondary-color" name="secondary-color" value="#10b981" class="w-full h-10 border border-gray-300 rounded-lg cursor-pointer">
+                                </div>
+                                <div>
+                                    <label for="accent-color" class="block text-sm font-medium text-gray-600">Cor de Destaque</label>
+                                    <input type="color" id="accent-color" name="accent-color" value="#f59e0b" class="w-full h-10 border border-gray-300 rounded-lg cursor-pointer">
+                                </div>
+                                 <div>
+                                    <label for="background-color" class="block text-sm font-medium text-gray-600">Cor de Fundo</label>
+                                    <input type="color" id="background-color" name="background-color" value="#f3f4f6" class="w-full h-10 border border-gray-300 rounded-lg cursor-pointer">
+                                </div>
+                                <div>
+                                    <label for="footer-color" class="block text-sm font-medium text-gray-600">Cor de Rodapé</label>
+                                    <input type="color" id="footer-color" name="footer-color" value="#1f2937" class="w-full h-10 border border-gray-300 rounded-lg cursor-pointer">
+                                </div>
+                                <div>
+                                    <label for="footer-text-color" class="block text-sm font-medium text-gray-600">Cor do Texto do Rodapé</label>
+                                    <input type="color" id="footer-text-color" name="footer-text-color" value="#e5e7eb" class="w-full h-10 border border-gray-300 rounded-lg cursor-pointer">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-lg font-medium text-gray-700 mb-2">Tema</label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 flex-1 justify-center cursor-pointer">
+                                    <input type="radio" name="theme" value="claro" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" checked>
+                                    <span>☀️ Claro</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 flex-1 justify-center cursor-pointer">
+                                    <input type="radio" name="theme" value="escuro" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>🌙 Escuro</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Seção do Cabeçalho -->
+                        <div class="border-t pt-6">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="header-toggle" name="header-toggle" data-feature="Cabeçalho (Header)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                <span class="text-lg font-medium text-gray-700">Cabeçalho (Header)</span>
+                            </label>
+                            <p class="text-sm text-gray-500 mt-1 ml-8">Define os elementos visíveis na barra de navegação superior.</p>
+                            
+                            <div id="header-options-container" class="space-y-3 mt-4 ml-8 hidden">
+                                <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="header-logo" name="header-logo" data-feature="Logotipo" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Logotipo</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="header-menu" name="header-menu" data-feature="Menu de Navegação Principal" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Menu de Navegação Principal</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="header-search" name="header-search" data-feature="Barra de Pesquisa" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Barra de Pesquisa</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="header-icons" name="header-icons" data-feature="Ícones de Ação (Perfil, Carrinho, etc.)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Ícones de Ação</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Seção da Navegação Principal -->
+                        <div class="border-t pt-6">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="main-nav-toggle" name="main-nav-toggle" data-feature="Navegação Principal" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                <span class="text-lg font-medium text-gray-700">Navegação Principal (Main Navigation)</span>
+                            </label>
+                            <p class="text-sm text-gray-500 mt-1 ml-8">Define a orientação do menu de navegação principal.</p>
+                            
+                            <div id="main-nav-options-container" class="space-y-3 mt-4 ml-8 hidden">
+                                <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="main-nav-horizontal" name="main-nav-horizontal" data-feature="Navegação Principal Horizontal" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Horizontal</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="main-nav-vertical" name="main-nav-vertical" data-feature="Navegação Principal Vertical" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Vertical</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Seção do Corpo do Conteúdo -->
+                        <div class="border-t pt-6">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="main-content-toggle" name="main-content-toggle" data-feature="Corpo do Conteúdo" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                <span class="text-lg font-medium text-gray-700">Corpo do Conteúdo (Main Content)</span>
+                            </label>
+                            <p class="text-sm text-gray-500 mt-1 ml-8">Define os principais padrões de layout para exibir o conteúdo.</p>
+                            
+                            <div id="main-content-options-container" class="space-y-3 mt-4 ml-8 hidden">
+                                <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="content-single-column" name="content-single-column" data-feature="Layout em Coluna Única" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Layout em Coluna Única</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="content-grid" name="content-grid" data-feature="Layout em Grade" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Layout em Grade (Grid)</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="content-list" name="content-list" data-feature="Layout em Lista / Feed" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Layout em Lista / Feed</span>
+                                </label>
+                                 <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="content-dashboard" name="content-dashboard" data-feature="Layout de Dashboard / Widgets" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Dashboard / Widgets</span>
+                                </label>
+                                 <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="content-split" name="content-split" data-feature="Layout de Tela Dividida (Split Screen)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Tela Dividida (Split Screen)</span>
+                                </label>
+                                 <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="content-tabs" name="content-tabs" data-feature="Layout com Abas (Tabs)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>Abas (Tabs)</span>
+                                </label>
+                                 <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <input type="checkbox" id="content-wizard" name="content-wizard" data-feature="Layout 'Mago' ou Passo a Passo (Wizard)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <span>"Mago" ou Passo a Passo (Wizard)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Seção da Barra Lateral -->
+                        <div class="border-t pt-6">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="sidebar-toggle" name="sidebar-toggle" data-feature="Barra Lateral (Sidebar)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                <span class="text-lg font-medium text-gray-700">Barra Lateral (Sidebar)</span>
+                            </label>
+                            <p class="text-sm text-gray-500 mt-1 ml-8">Define o conteúdo da barra lateral.</p>
+                            
+                            <div id="sidebar-options-container" class="space-y-3 mt-4 ml-8 hidden">
+                                <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="sidebar-filters" name="sidebar-filters" data-feature="Sidebar com Filtros e Categorias" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                        <span>Filtros e Categorias</span>
+                                    </div>
+                                    <i class="text-xs text-gray-500 ml-8">Em uma loja virtual, para refinar a busca de produtos.</i>
+                                </label>
+                                <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="sidebar-subsections" name="sidebar-subsections" data-feature="Sidebar com Menu de Subseções" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                        <span>Menu de Subseções</span>
+                                    </div>
+                                    <i class="text-xs text-gray-500 ml-8">Em um painel administrativo, para navegar dentro de um módulo.</i>
+                                </label>
+                                <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="sidebar-info" name="sidebar-info" data-feature="Sidebar com Informações Adicionais" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                        <span>Informações Adicionais</span>
+                                    </div>
+                                    <i class="text-xs text-gray-500 ml-8">Widgets, anúncios ou links relacionados.</i>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Seção do Rodapé -->
+                        <div class="border-t pt-6">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="footer-toggle" name="footer-toggle" data-feature="Rodapé (Footer)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                <span class="text-lg font-medium text-gray-700">Rodapé (Footer)</span>
+                            </label>
+                            <p class="text-sm text-gray-500 mt-1 ml-8">Define o conteúdo da barra inferior do site.</p>
+                            
+                            <div id="footer-options-container" class="space-y-3 mt-4 ml-8 hidden">
+                                <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="footer-contact" name="footer-contact" data-feature="Rodapé com Informações de Contato" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                        <span>Informações de Contato</span>
+                                    </div>
+                                    <i class="text-xs text-gray-500 ml-8">Endereço, e-mail, telefone.</i>
+                                </label>
+                                <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="footer-legal" name="footer-legal" data-feature="Rodapé com Links Legais" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                        <span>Links Legais</span>
+                                    </div>
+                                    <i class="text-xs text-gray-500 ml-8">Termos de Serviço, Política de Privacidade.</i>
+                                </label>
+                                <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="footer-social" name="footer-social" data-feature="Rodapé com Redes Sociais" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                        <span>Redes Sociais</span>
+                                    </div>
+                                    <i class="text-xs text-gray-500 ml-8">Ícones com links para os perfis da empresa.</i>
+                                </label>
+                                <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="footer-sitemap" name="footer-sitemap" data-feature="Rodapé com Mapa do Site" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                        <span>Mapa do Site</span>
+                                    </div>
+                                    <i class="text-xs text-gray-500 ml-8">Links para todas as seções importantes.</i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Painel Categorias Avançadas -->
+                <div id="advanced-panel" class="panel">
+                    <h2 class="text-3xl font-bold mb-6">8. Outras Categorias Avançadas</h2>
+                    <div class="space-y-4 bg-white p-6 rounded-lg shadow">
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Notificações" data-preview="notifications" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Notificações (Push, e-mails, in-app)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Pagamentos e Checkout" data-preview="checkout" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Pagamentos e Checkout (Carrinho, checkout em uma etapa, split)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Integrações Externas" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Integrações Externas (Logística, Gateways de Pagamento, CRMs)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Acessibilidade e SEO" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Acessibilidade e SEO (Suporte a leitores de tela, meta tags)</span>
+                        </label>
+                         <label class="flex items-center space-x-3 p-3 rounded-md hover:bg-gray-100 transition-colors">
+                            <input type="checkbox" data-feature="Suporte Multilíngue" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                            <span>Suporte Multilíngue (Internacionalização i18n)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Painel Estrutura Geral -->
+                <div id="general-structure-panel" class="panel">
+                    <h2 class="text-3xl font-bold mb-6">9. Estrutura Geral</h2>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="prose max-w-none text-gray-700">
+                            <p>Estes são os componentes técnicos que fazem o aplicativo funcionar.</p>
+                            <h3>1. O Cliente (Frontend)</h3>
+                            <p>Refere-se a tudo que é executado no navegador do usuário. É a camada responsável por criar a interface visual (o layout descrito acima) e capturar as interações do usuário. Sua estrutura é baseada em três tecnologias principais: HTML, CSS e JavaScript. Frameworks como React, Angular e Vue.js são usados para organizar essa estrutura de forma eficiente.</p>
+                            <h3>2. O Servidor (Backend)</h3>
+                            <p>É o "cérebro" da aplicação, rodando em um computador remoto (o servidor). O usuário não o vê, mas ele é responsável pela lógica de negócios, segurança e gerenciamento de dados. Inclui a Linguagem de Programação, Lógica da Aplicação e Autenticação e Segurança.</p>
+                            <h3 class="mt-6 text-xl font-bold">Bancos de Dados</h3>
+                            <p class="text-lg font-semibold text-indigo-600">O Ecossistema Moderno de Dados para a Web</p>
+                            
+                            <!-- Categoria 1: BaaS -->
+                            <div class="mt-6">
+                                <h4 class="font-bold text-gray-800">Categoria 1: Backend-as-a-Service (BaaS) - O Backend Completo</h4>
+                                <i class="text-sm text-gray-500">Estas plataformas não são apenas um banco de dados, elas oferecem um backend quase completo (autenticação, armazenamento de arquivos, APIs automáticas) com uma camada gratuita generosa.</i>
+                                <div class="space-y-3 mt-4">
+                                    <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: Firebase (BaaS)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Firebase (do Google)</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">A plataforma BaaS original e mais madura. Usa o banco de dados NoSQL Firestore.</i>
+                                    </label>
+                                    <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: Supabase (BaaS)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Supabase</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">A principal alternativa de código aberto ao Firebase. Usa PostgreSQL como seu núcleo.</i>
+                                    </label>
+                                    <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: Appwrite (BaaS)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Appwrite</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">Outra alternativa open source muito popular ao Firebase, com foco em simplicidade e na opção de auto-hospedagem.</i>
+                                    </label>
+                                    <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: PocketBase (BaaS)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>PocketBase</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">Um backend open source extremamente leve que roda em um único arquivo executável. Usa SQLite.</i>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Categoria 2: Serverless -->
+                            <div class="mt-6 border-t pt-4">
+                                <h4 class="font-bold text-gray-800">Categoria 2: Bancos de Dados Serverless e Distribuídos - A Nova Geração</h4>
+                                <i class="text-sm text-gray-500">Estes são bancos de dados que escalam automaticamente (inclusive para zero, economizando dinheiro) e são otimizados para a arquitetura serverless.</i>
+                                <div class="space-y-3 mt-4">
+                                     <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: Neon (Serverless)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Neon</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">Uma plataforma de PostgreSQL Serverless.</i>
+                                    </label>
+                                     <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: PlanetScale (Serverless)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>PlanetScale</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">Uma plataforma de MySQL Serverless construída sobre o Vitess (tecnologia que escala o YouTube).</i>
+                                    </label>
+                                     <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: MongoDB Atlas (Serverless)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>MongoDB Atlas</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">A plataforma de nuvem oficial do MongoDB.</i>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Categoria 3: Edge -->
+                           <div class="mt-6 border-t pt-4">
+                                <h4 class="font-bold text-gray-800">Categoria 3: Bancos de Dados na Edge - Velocidade Máxima Global</h4>
+                                <i class="text-sm text-gray-500">A tendência mais recente: colocar os dados o mais perto possível do usuário final para latência quase zero.</i>
+                                <div class="space-y-3 mt-4">
+                                     <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: Cloudflare D1 (Edge)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Cloudflare D1</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">Um banco de dados SQL serverless construído sobre SQLite que roda na rede da Cloudflare.</i>
+                                    </label>
+                                     <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: Turso (Edge)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Turso</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">Um banco de dados distribuído baseado no libSQL, um fork do SQLite, com foco em replicação para a edge.</i>
+                                    </label>
+                                     <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: Upstash (Edge)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Upstash</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">Uma plataforma de dados serverless para Redis e Kafka.</i>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Categoria 4: Vetoriais -->
+                            <div class="mt-6 border-t pt-4">
+                                <h4 class="font-bold text-gray-800">Categoria 4: Bancos de Dados Vetoriais - O Motor da IA</h4>
+                                <i class="text-sm text-gray-500">Com a explosão de IA generativa, estes bancos de dados se tornaram essenciais para armazenar e buscar dados com base em seu significado semântico.</i>
+                                <div class="space-y-3 mt-4">
+                                     <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: Pinecone (Vector)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Pinecone</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">O líder de mercado em bancos de dados vetoriais gerenciados.</i>
+                                    </label>
+                                     <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Database: Chroma / Weaviate (Vector)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Chroma / Weaviate</span>
+                                        </div>
+                                        <i class="text-xs text-gray-500 ml-8">Alternativas open source populares ao Pinecone.</i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Painel Direito de Pré-visualização -->
+        <aside class="w-full lg:w-2/5 flex flex-col p-8 bg-gray-200">
+            <h2 class="text-2xl font-bold mb-4">Pré-visualização</h2>
+            <div id="preview-container" class="bg-white rounded-lg shadow-lg w-full flex-1 transition-colors duration-300 overflow-hidden flex flex-col">
+                 <div id="preview-header" class="h-12 rounded-t-md flex items-center justify-between px-4 transition-colors duration-300 flex-shrink-0" style="background-color: #4f46e5;">
+                     <!-- Elementos do cabeçalho aparecerão aqui -->
+                 </div>
+                 <div class="flex flex-1 overflow-hidden">
+                    <div id="preview-sidebar" class="w-24 bg-gray-200 p-2 hidden flex-col items-center space-y-3 pt-3 flex-shrink-0 overflow-y-auto">
+                        <!-- Itens da navegação vertical e sidebar -->
+                    </div>
+                    <div id="preview-body" class="p-4 flex-1 overflow-y-auto">
+                         <div id="preview-horizontal-nav" class="w-full h-8 bg-gray-200 rounded-md hidden items-center px-3 space-x-3 mb-4">
+                            <!-- Itens da navegação horizontal -->
+                        </div>
+                        <div id="preview-content-layouts" class="w-full flex items-center justify-center gap-2 mb-4 flex-wrap">
+                            <!-- Layouts do conteúdo principal -->
+                        </div>
+                        <div id="preview-components-container" class="flex flex-wrap gap-4 content-start">
+                            <!-- Componentes de pré-visualização serão inseridos aqui -->
+                        </div>
+                    </div>
+                 </div>
+                 <div id="preview-footer" class="h-10 rounded-b-md flex-shrink-0">
+                     <!-- Elementos do rodapé aparecerão aqui -->
+                 </div>
+            </div>
+        </aside>
+    </div>
+        
+    <!-- Prompt Gerado -->
+    <div class="h-1/3 bg-white border-t border-gray-200 flex flex-col p-8">
+         <div class="flex justify-between items-center mb-4">
+             <h2 class="text-2xl font-bold">Prompt Gerado</h2>
+             <button id="copy-button" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                Copiar Prompt
+            </button>
+         </div>
+         <pre id="prompt-output" class="bg-gray-800 text-white p-4 rounded-lg text-sm flex-1 overflow-auto w-full whitespace-pre-wrap">Selecione as opções para gerar o prompt...</pre>
+    </div>
+</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const panels = document.querySelectorAll('.panel');
+            const inputs = document.querySelectorAll('input, textarea');
+            const promptOutput = document.getElementById('prompt-output');
+            const copyButton = document.getElementById('copy-button');
+            const previewContainer = document.getElementById('preview-container');
+            const previewHeader = document.getElementById('preview-header');
+            const previewBody = document.getElementById('preview-body');
+            const previewComponentsContainer = document.getElementById('preview-components-container');
+            const previewFooter = document.getElementById('preview-footer');
+
+            const previewComponents = {
+                'auth-forms': '<div class="preview-component" data-id="auth-forms"><div class="font-semibold">Login Form</div><div class="text-xs text-gray-500">Usuário, Senha</div></div>',
+                'profile-forms': '<div class="preview-component" data-id="profile-forms"><div class="font-semibold">Editar Perfil</div><div class="text-xs text-gray-500">Avatar, Nome</div></div>',
+                'store-forms': '<div class="preview-component" data-id="store-forms"><div class="font-semibold">Criar Loja</div><div class="text-xs text-gray-500">Nome, Logo</div></div>',
+                'product-forms': '<div class="preview-component" data-id="product-forms"><div class="font-semibold">Novo Produto</div><div class="text-xs text-gray-500">Nome, Preço</div></div>',
+                'seller-dashboard': '<div class="preview-component" data-id="seller-dashboard"><div class="font-semibold">Dashboard Lojista</div><div class="text-xs text-gray-500">Vendas, Gráficos</div></div>',
+                'product-catalog': '<div class="preview-component" data-id="product-catalog"><div class="font-semibold">Catálogo</div><div class="text-xs text-gray-500">Lista de Produtos</div></div>',
+                'ad-formats': '<div class="preview-component" data-id="ad-formats"><div class="font-semibold">Banner Ad</div><div class="text-xs text-gray-500">Imagem Promocional</div></div>',
+                'plans-pricing': '<div class="preview-component" data-id="plans-pricing"><div class="font-semibold">Planos</div><div class="text-xs text-gray-500">Básico, Pro, Premium</div></div>',
+                'admin-dashboard': '<div class="preview-component" data-id="admin-dashboard"><div class="font-semibold">Admin Dashboard</div><div class="text-xs text-gray-500">Usuários, Lojas</div></div>',
+                'support-system': '<div class="preview-component" data-id="support-system"><div class="font-semibold">Suporte</div><div class="text-xs text-gray-500">Abrir Ticket</div></div>',
+                'search-bar': '<div class="preview-component" data-id="search-bar"><div class="font-semibold">Busca</div><div class="text-xs text-gray-500">Campo de pesquisa</div></div>',
+                'carousels': '<div class="preview-component" data-id="carousels"><div class="font-semibold">Carrossel</div><div class="text-xs text-gray-500">Itens em destaque</div></div>',
+                'geolocation': '<div class="preview-component" data-id="geolocation"><div class="font-semibold">Mapa</div><div class="text-xs text-gray-500">Lojas próximas</div></div>',
+                'notifications': '<div class="preview-component" data-id="notifications"><div class="font-semibold">Notificações</div><div class="text-xs text-gray-500">Ícone de sino</div></div>',
+                'checkout': '<div class="preview-component" data-id="checkout"><div class="font-semibold">Checkout</div><div class="text-xs text-gray-500">Itens, Pagamento</div></div>',
+            };
+
+            function updatePreviewComponents(checkbox) {
+                const previewId = checkbox.dataset.preview;
+                if (!previewId) return;
+
+                const existingComponent = previewComponentsContainer.querySelector(`.preview-component[data-id="${previewId}"]`);
+                
+                if (checkbox.checked && !existingComponent) {
+                    const componentHTML = previewComponents[previewId];
+                    if(componentHTML){
+                       const tempDiv = document.createElement('div');
+                       tempDiv.innerHTML = componentHTML;
+                       const newComponent = tempDiv.firstElementChild;
+                       
+                       const accentColor = document.getElementById('accent-color').value;
+                       newComponent.style.backgroundColor = '#ffffff';
+                       newComponent.style.borderLeft = `4px solid ${accentColor}`;
+                       newComponent.style.padding = '8px';
+                       newComponent.style.borderRadius = '4px';
+                       newComponent.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+                       newComponent.style.width = 'calc(50% - 8px)'; // Two columns
+                       
+                       previewComponentsContainer.appendChild(newComponent);
+                    }
+                } else if (!checkbox.checked && existingComponent) {
+                    existingComponent.remove();
+                }
+            }
+
+            function updateHeaderPreview() {
+                previewHeader.innerHTML = ''; 
+                
+                if (!document.getElementById('header-toggle').checked) {
+                    previewHeader.innerHTML = '<div class="text-xs text-white/50 mx-auto">Cabeçalho desativado</div>';
+                    return;
+                }
+
+                const logoChecked = document.getElementById('header-logo').checked;
+                const menuChecked = document.getElementById('header-menu').checked;
+                const searchChecked = document.getElementById('header-search').checked;
+                const iconsChecked = document.getElementById('header-icons').checked;
+
+                let leftSide = '';
+                if (logoChecked) { leftSide += '<div class="font-bold text-white text-sm">LOGO</div>'; }
+                if (menuChecked) {
+                    leftSide += `<div class="hidden sm:flex items-center space-x-3 ml-4">
+                        <div class="text-white/80 text-xs">Home</div> <div class="text-white/80 text-xs">Produtos</div>
+                    </div>`;
+                }
+
+                let rightSide = '';
+                if (searchChecked) { rightSide += '<div class="w-24 h-5 bg-white/20 rounded-md hidden md:block"></div>'; }
+                if (iconsChecked) {
+                    rightSide += `<div class="flex items-center space-x-2 ml-4">
+                        <div class="w-5 h-5 bg-white/50 rounded-full"></div> <div class="w-5 h-5 bg-white/50 rounded-full"></div>
+                    </div>`;
+                }
+
+                previewHeader.innerHTML = `<div class="flex items-center">${leftSide}</div><div class="flex items-center">${rightSide}</div>`;
+            }
+
+            function updateSideLayoutsPreview() {
+                const sidebar = document.getElementById('preview-sidebar');
+                const horizontalNav = document.getElementById('preview-horizontal-nav');
+                const theme = document.querySelector('input[name="theme"]:checked').value;
+
+                sidebar.innerHTML = '';
+                horizontalNav.classList.add('hidden');
+                horizontalNav.classList.remove('flex');
+                
+                let isSidebarVisible = false;
+
+                if (document.getElementById('main-nav-toggle').checked && document.getElementById('main-nav-vertical').checked) {
+                    isSidebarVisible = true;
+                    sidebar.innerHTML += `<div class="text-xs text-gray-500 mb-2 font-bold w-full">Navegação</div>`;
+                    sidebar.innerHTML += `<div class="w-8 h-8 bg-gray-400 rounded-full"></div><div class="w-8 h-4 bg-gray-400 rounded mt-2"></div><div class="w-8 h-4 bg-gray-400 rounded"></div>`;
+                }
+
+                if (document.getElementById('sidebar-toggle').checked) {
+                    isSidebarVisible = true;
+                    if (sidebar.innerHTML !== '') { sidebar.innerHTML += '<hr class="w-full border-gray-400 my-3">'; }
+                    sidebar.innerHTML += `<div class="text-xs text-gray-500 mb-2 font-bold w-full">Conteúdo</div>`;
+
+                    if(document.getElementById('sidebar-filters').checked) {
+                        sidebar.innerHTML += `<div class="text-xs w-full text-gray-600">Filtro 1</div><div class="w-full h-2 bg-gray-400 rounded mt-1"></div>`;
+                    }
+                     if(document.getElementById('sidebar-subsections').checked) {
+                        sidebar.innerHTML += `<div class="text-xs w-full text-gray-600 mt-2 pl-2 border-l-2 border-gray-400">Sub A</div>`;
+                    }
+                    if(document.getElementById('sidebar-info').checked) {
+                        sidebar.innerHTML += `<div class="w-full h-10 bg-gray-400 rounded mt-3 flex items-center justify-center text-xs text-gray-600">Info</div>`;
+                    }
+                }
+
+                sidebar.style.backgroundColor = theme === 'escuro' ? '#374151' : '#e5e7eb';
+                sidebar.classList.toggle('hidden', !isSidebarVisible);
+                sidebar.classList.toggle('flex', isSidebarVisible);
+
+                if (document.getElementById('main-nav-toggle').checked && document.getElementById('main-nav-horizontal').checked) {
+                    horizontalNav.classList.remove('hidden');
+                    horizontalNav.classList.add('flex');
+                    horizontalNav.innerHTML = `<div class="w-10 h-4 bg-gray-300 rounded"></div><div class="w-10 h-4 bg-gray-300 rounded"></div>`;
+                }
+            }
+
+            function updateFooterPreview() {
+                previewFooter.innerHTML = '';
+                previewFooter.classList.remove('p-2', 'flex', 'items-center', 'justify-around');
+                previewFooter.style.backgroundColor = 'transparent';
+
+                if (!document.getElementById('footer-toggle').checked) {
+                    return;
+                }
+                
+                previewFooter.classList.add('p-2', 'flex', 'items-center', 'justify-around');
+                const footerColor = document.getElementById('footer-color').value;
+                const footerTextColor = document.getElementById('footer-text-color').value;
+                
+                previewFooter.style.backgroundColor = footerColor;
+
+                let footerContent = '';
+                if (document.getElementById('footer-contact').checked) {
+                    footerContent += `<div class="text-xs">Contato</div>`;
+                }
+                if (document.getElementById('footer-legal').checked) {
+                    footerContent += `<div class="text-xs">Legal</div>`;
+                }
+                if (document.getElementById('footer-social').checked) {
+                    footerContent += `<div class="text-xs">Social</div>`;
+                }
+                if (document.getElementById('footer-sitemap').checked) {
+                    footerContent += `<div class="text-xs">Mapa</div>`;
+                }
+
+                previewFooter.innerHTML = footerContent;
+                previewFooter.style.color = footerTextColor;
+            }
+
+
+            function updateMainContentPreview() {
+                const layoutsContainer = document.getElementById('preview-content-layouts');
+                layoutsContainer.innerHTML = '';
+
+                if (!document.getElementById('main-content-toggle').checked) return;
+
+                const contentLayouts = [
+                    { id: 'content-single-column', icon: 'M4 6h16M4 12h16M4 18h7', title: 'Coluna' },
+                    { id: 'content-grid', icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z', title: 'Grade' },
+                    { id: 'content-list', icon: 'M4 6h16M4 10h16M4 14h16M4 18h16', title: 'Lista' },
+                    { id: 'content-dashboard', icon: 'M9 17v-2a4 4 0 00-4-4H3V9h2a4 4 0 004-4V3l7 4-7 4zm0 0v2a4 4 0 014 4h2v-2h-2a4 4 0 01-4-4z', title: 'Dash' },
+                    { id: 'content-split', icon: 'M5 3a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2H5zm13 2v14H6V5h12zM11 5H6v14h5V5z', title: 'Split' },
+                    { id: 'content-tabs', icon: 'M4 7v10h16V7H4zm16-2a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V7a2 2 0 012-2h3V3a1 1 0 011-1h6a1 1 0 011 1v2h3z', title: 'Abas' },
+                    { id: 'content-wizard', icon: 'M13 5l7 7-7 7M5 5l7 7-7 7', title: 'Passos' },
+                ];
+                
+                contentLayouts.forEach(layout => {
+                    if (document.getElementById(layout.id).checked) {
+                        layoutsContainer.innerHTML += `
+                            <div class="flex flex-col items-center p-2 bg-gray-200 rounded-md text-gray-600" title="${layout.title}">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${layout.icon}"></path></svg>
+                                <span class="text-xs mt-1">${layout.title}</span>
+                            </div>
+                        `;
+                    }
+                });
+            }
+            
+            // Navegação
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    panels.forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                    const targetPanel = document.getElementById(this.dataset.target + '-panel');
+                    if(targetPanel) { targetPanel.classList.add('active'); }
+                });
+            });
+
+            // Geração do Prompt e Atualização da UI
+            function generatePrompt() {
+                const appName = document.getElementById('app-name').value || 'Nome não definido';
+                const appGoal = document.getElementById('app-goal').value || 'Objetivo não definido';
+
+                let prompt = `### PROMPT PARA CRIAÇÃO DE APLICATIVO WEB ###\n\n`;
+                prompt += `**1. IDEIA CENTRAL E OBJETIVO**\n- **Nome do Aplicativo:** ${appName}\n- **Objetivo Principal:** ${appGoal}\n\n`;
+
+                const selectedFeatures = Array.from(document.querySelectorAll('#panels-container input[type="checkbox"]:checked'))
+                    .filter(cb => cb.closest('#general-structure-panel') === null && cb.closest('#layout-panel') === null)
+                    .map(cb => `- ${cb.dataset.feature}`)
+                    .join('\n');
+
+                if (selectedFeatures) { prompt += `**2. FUNCIONALIDADES PRINCIPAIS**\n${selectedFeatures}\n\n`; }
+
+                const primaryColor = document.getElementById('primary-color').value;
+                const secondaryColor = document.getElementById('secondary-color').value;
+                const accentColor = document.getElementById('accent-color').value;
+                const backgroundColor = document.getElementById('background-color').value;
+                const footerColor = document.getElementById('footer-color').value;
+                const footerTextColor = document.getElementById('footer-text-color').value;
+                const theme = document.querySelector('input[name="theme"]:checked').value;
+
+                prompt += `**3. DESIGN E LAYOUT GERAL**\n`;
+                prompt += `- **Cores:**\n  - Primária: ${primaryColor}\n  - Secundária: ${secondaryColor}\n  - Destaque: ${accentColor}\n  - Fundo: ${backgroundColor}\n  - Rodapé: ${footerColor}\n  - Texto do Rodapé: ${footerTextColor}\n`;
+                prompt += `- **Tema:** ${theme.charAt(0).toUpperCase() + theme.slice(1)}\n`;
+
+                if (document.getElementById('header-toggle').checked) {
+                    prompt += `- **Cabeçalho (Header):**\n`;
+                    const headerOptions = [ { id: 'header-logo', text: 'Logotipo' }, { id: 'header-menu', text: 'Menu de Navegação' }, { id: 'header-search', text: 'Barra de Pesquisa' }, { id: 'header-icons', text: 'Ícones de Ação' } ];
+                    let opts = headerOptions.filter(opt => document.getElementById(opt.id).checked).map(o => o.text);
+                    prompt += `  - Incluir: ${opts.length > 0 ? opts.join(', ') : 'Nenhum componente selecionado'}\n`;
+                }
+
+                if (document.getElementById('main-nav-toggle').checked) {
+                    prompt += `- **Navegação Principal:**\n`;
+                    let navOpts = [];
+                    if (document.getElementById('main-nav-horizontal').checked) navOpts.push('Horizontal');
+                    if (document.getElementById('main-nav-vertical').checked) navOpts.push('Vertical (Sidebar)');
+                    prompt += `  - Orientação: ${navOpts.length > 0 ? navOpts.join(' e ') : 'Nenhuma orientação selecionada'}\n`;
+                }
+
+                if (document.getElementById('main-content-toggle').checked) {
+                    prompt += `- **Layout do Conteúdo Principal:**\n`;
+                    const contentOptions = document.querySelectorAll('#main-content-options-container input:checked');
+                    let contentLayouts = Array.from(contentOptions).map(cb => cb.dataset.feature);
+                    if (contentLayouts.length > 0) {
+                        contentLayouts.forEach(layout => prompt += `  - Utilizar ${layout}\n`);
+                    } else {
+                        prompt += `  - (Nenhum layout de conteúdo selecionado)\n`;
+                    }
+                }
+
+                if (document.getElementById('sidebar-toggle').checked) {
+                    prompt += `- **Barra Lateral (Sidebar):**\n`;
+                    const sidebarOptions = document.querySelectorAll('#sidebar-options-container input:checked');
+                    let sidebarContents = Array.from(sidebarOptions).map(cb => {
+                        return `  - ${cb.parentElement.textContent.trim()} (${cb.parentElement.nextElementSibling.textContent.trim()})`;
+                    });
+                     if (sidebarContents.length > 0) {
+                        prompt += sidebarContents.join('\n') + '\n';
+                    } else {
+                        prompt += `  - (Nenhum conteúdo de sidebar selecionado)\n`;
+                    }
+                }
+
+                if (document.getElementById('footer-toggle').checked) {
+                    prompt += `- **Rodapé (Footer):**\n`;
+                    const footerOptions = [
+                        { id: 'footer-contact', text: 'Informações de Contato' },
+                        { id: 'footer-legal', text: 'Links Legais' },
+                        { id: 'footer-social', text: 'Redes Sociais' },
+                        { id: 'footer-sitemap', text: 'Mapa do Site' }
+                    ];
+                    let hasFooterOption = false;
+                    footerOptions.forEach(opt => {
+                        if (document.getElementById(opt.id).checked) {
+                            prompt += `  - Incluir ${opt.text}\n`;
+                            hasFooterOption = true;
+                        }
+                    });
+                    if (!hasFooterOption) {
+                        prompt += `  - (Nenhum conteúdo de rodapé selecionado)\n`;
+                    }
+                }
+                
+                const selectedDBs = Array.from(document.querySelectorAll('#general-structure-panel input[type="checkbox"]:checked'))
+                    .map(cb => `- ${cb.dataset.feature}`);
+                
+                if (selectedDBs.length > 0) {
+                    prompt += `\n**4. ESTRUTURA TÉCNICA (BACKEND E DADOS)**\n`;
+                    prompt += `O backend deverá ser construído utilizando a(s) seguinte(s) tecnologia(s) de banco de dados:\n`;
+                    prompt += selectedDBs.join('\n');
+                }
+
+
+                prompt += `\n\n**INSTRUÇÃO FINAL:**\nCom base nos requisitos acima, crie um aplicativo web completo e funcional em um único arquivo HTML. Utilize TailwindCSS para o estilo e JavaScript para a interatividade. O design deve ser moderno, limpo e responsivo.`;
+                return prompt;
+            }
+
+            function updateApp() {
+                saveConfigToStorage();
+                promptOutput.textContent = generatePrompt();
+
+                const primaryColor = document.getElementById('primary-color').value;
+                const backgroundColor = document.getElementById('background-color').value;
+                const theme = document.querySelector('input[name="theme"]:checked').value;
+                previewHeader.style.backgroundColor = primaryColor;
+                previewContainer.style.backgroundColor = theme === 'escuro' ? '#1f2937' : backgroundColor;
+                
+                document.querySelectorAll('input[type="checkbox"][data-preview]').forEach(updatePreviewComponents);
+                updateHeaderPreview();
+                updateSideLayoutsPreview();
+                updateMainContentPreview();
+                updateFooterPreview();
+            }
+
+            // Storage
+            function saveConfigToStorage() {
+                const config = {};
+                inputs.forEach(input => {
+                    if (input.type === 'checkbox' || input.type === 'radio') {
+                        if (input.checked) { config[input.id || input.name + input.value] = true; }
+                    } else { config[input.id] = input.value; }
+                });
+                localStorage.setItem('appBuilderConfig', JSON.stringify(config));
+            }
+
+            function loadConfigFromStorage() {
+                const config = JSON.parse(localStorage.getItem('appBuilderConfig'));
+                if (config) {
+                    inputs.forEach(input => {
+                        const key = input.id || input.name + input.value;
+                        if (config[key] !== undefined) {
+                            if (input.type === 'checkbox' || input.type === 'radio') {
+                                input.checked = !!config[key];
+                            } else { input.value = config[key]; }
+                        }
+                    });
+                }
+                // Garante que os containers de opções sejam exibidos se o toggle estiver checado ao carregar
+                ['header', 'main-nav', 'main-content', 'sidebar', 'footer'].forEach(section => {
+                    const toggle = document.getElementById(`${section}-toggle`);
+                    const container = document.getElementById(`${section}-options-container`);
+                    if (toggle && container && toggle.checked) {
+                        container.classList.remove('hidden');
+                    }
+                });
+            }
+            
+            // Event Listeners for Toggles
+            ['header', 'main-nav', 'main-content', 'sidebar', 'footer'].forEach(section => {
+                const toggle = document.getElementById(`${section}-toggle`);
+                const container = document.getElementById(`${section}-options-container`);
+                if (toggle && container) {
+                    toggle.addEventListener('change', () => {
+                        container.classList.toggle('hidden', !toggle.checked);
+                        if (!toggle.checked) {
+                            container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                                if (cb.checked) { cb.checked = false; }
+                            });
+                        }
+                        updateApp();
+                    });
+                }
+            });
+
+            inputs.forEach(input => {
+                input.addEventListener('input', updateApp);
+                input.addEventListener('change', updateApp);
+            });
+
+            copyButton.addEventListener('click', () => {
+                const textToCopy = promptOutput.textContent;
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.style.position = 'fixed'; textArea.style.top = 0; textArea.style.left = 0; textArea.style.opacity = 0;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    copyButton.innerHTML = `<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Prompt Copiado!`;
+                    copyButton.classList.replace('bg-green-500', 'bg-blue-500');
+                } catch (err) { console.error('Falha ao copiar o texto:', err); }
+                document.body.removeChild(textArea);
+                setTimeout(() => {
+                    copyButton.innerHTML = `<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> Copiar Prompt`;
+                    copyButton.classList.replace('bg-blue-500', 'bg-green-500');
+                }, 2000);
+            });
+
+            // Inicialização
+            loadConfigFromStorage();
+            updateApp();
+        });
+    </script>
+</body>
+</html>
+
