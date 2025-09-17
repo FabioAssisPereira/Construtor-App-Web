@@ -44,6 +44,7 @@
                 <a href="#layout" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="layout">7. Layout e Design</a>
                 <a href="#advanced" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="advanced">8. Outras Categorias</a>
                 <a href="#general-structure" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="general-structure">9. Estrutura Geral</a>
+                <a href="#api-types" class="nav-link block w-full text-left font-semibold text-gray-700 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 mb-2" data-target="api-types">10. Tipo de APIs</a>
             </nav>
         </aside>
 
@@ -573,6 +574,260 @@
                     </div>
                 </div>
 
+                <!-- Painel Tipo de APIs -->
+                <div id="api-types-panel" class="panel">
+                    <h2 class="text-3xl font-bold mb-6">10. Tipo de APIs</h2>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="prose max-w-none text-gray-700">
+                            <h3>APIs internas e externas</h3>
+                            <h4 class="font-bold text-gray-800">1. A API Principal do Próprio Aplicativo (API Interna)</h4>
+                            <i class="text-sm text-gray-500">Esta é a espinha dorsal do seu sistema. É a API que seu frontend consome para buscar, criar e modificar dados. Um app robusto geralmente usa:</i>
+                            
+                            <div class="mt-4">
+                                <h5 class="font-semibold text-gray-700">Estilos REST ou GraphQL:</h5>
+                                <div class="space-y-3 mt-2">
+                                    <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Estilo de API: REST" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>REST</span>
+                                            <i class="text-xs text-gray-500 ml-2">É a escolha mais tradicional e sólida para a maioria das operações. É madura, bem documentada e universalmente compreendida.</i>
+                                        </div>
+                                    </label>
+                                    <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Estilo de API: GraphQL" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>GraphQL</span>
+                                            <i class="text-xs text-gray-500 ml-2">É usada em aplicações com interfaces muito complexas (como painéis de controle e redes sociais) para dar ao frontend o poder de buscar exatamente os dados de que precisa, melhorando a performance.</i>
+                                        </div>
+                                    </label>
+                                    <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="Estilo de API: Híbrido (REST e GraphQL)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Híbrido</span>
+                                             <i class="text-xs text-gray-500 ml-2">Muitos apps robustos usam REST para a maioria das operações e adicionam um endpoint GraphQL para telas específicas que precisam de mais flexibilidade.</i>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 border-t pt-4">
+                                <h4 class="font-bold text-gray-800">2. APIs de Autenticação e Identidade</h4>
+                                <div class="mt-2">
+                                    <h5 class="font-semibold text-gray-700">2.1. Login Social (OAuth 2.0):</h5>
+                                    <i class="text-sm text-gray-500">Indispensável para uma boa experiência do usuário. As mais comuns são:</i>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mt-2">
+                                        <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <input type="checkbox" data-feature="Login Social: Google Sign-In" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Google Sign-In</span>
+                                        </label>
+                                        <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <input type="checkbox" data-feature="Login Social: Facebook Login" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Facebook Login</span>
+                                        </label>
+                                        <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <input type="checkbox" data-feature="Login Social: Sign in with Apple" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Sign in with Apple</span>
+                                        </label>
+                                        <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <input type="checkbox" data-feature="Login Social: GitHub / LinkedIn" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>GitHub / LinkedIn <i class="text-xs text-gray-500">(para apps de nicho profissional/dev)</i></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <h5 class="font-semibold text-gray-700">2.2. Auth-as-a-Service:</h5>
+                                    <i class="text-sm text-gray-500">Plataformas que gerenciam todo o ciclo de vida do usuário (login, cadastro, recuperação de senha, segurança de dois fatores, etc.)</i>
+                                    <div class="space-y-3 mt-2">
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                             <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="Auth-as-a-Service: Auth0 (by Okta)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Auth0 (by Okta): <i class="text-xs text-gray-500">Considerado o padrão ouro. Extremamente poderoso, seguro e customizável.</i></span>
+                                            </div>
+                                        </label>
+                                         <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                             <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="Auth-as-a-Service: Firebase Authentication" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Firebase Authentication: <i class="text-xs text-gray-500">Muito fácil de integrar, especialmente se você já está no ecossistema Google/Firebase.</i></span>
+                                            </div>
+                                        </label>
+                                         <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                             <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="Auth-as-a-Service: Supabase Auth" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Supabase Auth: <i class="text-xs text-gray-500">Alternativa open source que tem ganhado enorme popularidade. Usa PostgreSQL para gerenciar usuários.</i></span>
+                                            </div>
+                                        </label>
+                                         <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                             <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="Auth-as-a-Service: Clerk" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Clerk: <i class="text-xs text-gray-500">Uma opção mais nova, com foco extremo na experiência do desenvolvedor (DX) e componentes de UI prontos.</i></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 border-t pt-4">
+                                <h4 class="font-bold text-gray-800">3. APIs de Pagamento (Payment Gateways)</h4>
+                                <i class="text-sm text-gray-500">Se seu app envolve qualquer tipo de transação financeira (e-commerce, assinaturas, serviços), uma API de pagamento é obrigatória.</i>
+                                <div class="space-y-3 mt-2">
+                                    <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="API de Pagamento: Stripe" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Stripe: <i class="text-xs text-gray-500">O padrão global para desenvolvedores. Famoso por sua documentação impecável, APIs flexíveis e recursos poderosos (gestão de assinaturas, prevenção de fraudes).</i></span>
+                                        </div>
+                                    </label>
+                                    <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="API de Pagamento: Mercado Pago" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Mercado Pago: <i class="text-xs text-gray-500">Essencial para o mercado brasileiro. Oferece método de pagamento local como Boleto e Pix, o que é crucial para a conversão de vendas no Brasil.</i></span>
+                                        </div>
+                                    </label>
+                                     <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="API de Pagamento: PagSeguro" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>PagSeguro: <i class="text-xs text-gray-500">Essencial para o mercado brasileiro. Oferece método de pagamento local como Boleto e Pix, o que é crucial para a conversão de vendas no Brasil.</i></span>
+                                        </div>
+                                    </label>
+                                    <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="API de Pagamento: Adyen" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Adyen: <i class="text-xs text-gray-500">Plataforma robusta focada em grandes empresas e operações globais.</i></span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 border-t pt-4">
+                                <h4 class="font-bold text-gray-800">4. APIs de Comunicação</h4>
+                                <i class="text-sm text-gray-500">Seu aplicativo precisa se comunicar com os usuários de forma confiável.</i>
+                                <div class="mt-2">
+                                    <h5 class="font-semibold text-gray-700">Email Transacional (para senhas, recibos, notificações):</h5>
+                                    <div class="space-y-3 mt-2">
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Comunicação: SendGrid" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>SendGrid: <i class="text-xs text-gray-500">Um dos líderes de mercado, muito confiável.</i></span>
+                                            </div>
+                                        </label>
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Comunicação: Mailgun" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Mailgun: <i class="text-xs text-gray-500">Forte concorrente, focado em desenvolvedores.</i></span>
+                                            </div>
+                                        </label>
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Comunicação: Amazon SES" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Amazon SES: <i class="text-xs text-gray-500">Opção da AWS, extremamente barata em larga escala.</i></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <h5 class="font-semibold text-gray-700">SMS, WhatsApp e Voz:</h5>
+                                     <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors mt-2">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" data-feature="API de Comunicação: Twilio" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                            <span>Twilio: <i class="text-xs text-gray-500">A plataforma líder absoluta para qualquer tipo de comunicação via telefone.</i></span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="mt-4">
+                                    <h5 class="font-semibold text-gray-700">Notificações Push (Web e Mobile):</h5>
+                                    <div class="space-y-3 mt-2">
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Comunicação: Firebase Cloud Messaging (FCM)" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Firebase Cloud Messaging (FCM): <i class="text-xs text-gray-500">A solução do Google, gratuita e padrão para notificações.</i></span>
+                                            </div>
+                                        </label>
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Comunicação: OneSignal" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>OneSignal: <i class="text-xs text-gray-500">Plataforma popular que simplifica o gerenciamento de notificações push.</i></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 border-t pt-4">
+                                <h4 class="font-bold text-gray-800">5. APIs de Serviços de Terceiros (Funcionalidades)</h4>
+                                <i class="text-sm text-gray-500">Estas APIs adicionam funcionalidades ricas ao seu aplicativo, que seriam inviáveis de construir internamente.</i>
+                                <div class="mt-2">
+                                    <h5 class="font-semibold text-gray-700">Mapas e Geolocalização:</h5>
+                                    <div class="space-y-3 mt-2">
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Terceiros: Google Maps Platform" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Google Maps Platform: <i class="text-xs text-gray-500">Padrão para mapas, rotas, busca de lugares e autocompletar endereços.</i></span>
+                                            </div>
+                                        </label>
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Terceiros: Mapbox" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Mapbox: <i class="text-xs text-gray-500">Alternativa poderosa e altamente customizável.</i></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <h5 class="font-semibold text-gray-700">Armazenamento de Arquivos em Nuvem:</h5>
+                                    <div class="space-y-3 mt-2">
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Terceiros: Amazon S3" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Amazon S3: <i class="text-xs text-gray-500">O padrão da indústria para armazenamento de objetos.</i></span>
+                                            </div>
+                                        </label>
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Terceiros: Google Cloud Storage" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Google Cloud Storage / Cloudflare R2: <i class="text-xs text-gray-500">Concorrentes diretos e excelentes.</i></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <h5 class="font-semibold text-gray-700">Busca Avançada (Search):</h5>
+                                    <div class="space-y-3 mt-2">
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Terceiros: Algolia" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Algolia: <i class="text-xs text-gray-500">Oferece uma experiência de busca "as-you-type" incrivelmente rápida e relevante.</i></span>
+                                            </div>
+                                        </label>
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Terceiros: Elasticsearch / OpenSearch" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Elasticsearch / OpenSearch: <i class="text-xs text-gray-500">Soluções open source para busca de texto completo.</i></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                 <div class="mt-4">
+                                    <h5 class="font-semibold text-gray-700">Análise de Dados (Analytics):</h5>
+                                    <div class="space-y-3 mt-2">
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Terceiros: Google Analytics" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Google Analytics: <i class="text-xs text-gray-500">Para entender o comportamento do usuário no seu site.</i></span>
+                                            </div>
+                                        </label>
+                                        <label class="block p-2 rounded-md hover:bg-gray-100 transition-colors">
+                                            <div class="flex items-center space-x-3">
+                                                <input type="checkbox" data-feature="API de Terceiros: Segment" class="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                                <span>Segment: <i class="text-xs text-gray-500">Uma "API de APIs". Você envia seus eventos para a Segment uma vez, e ela distribui para dezenas de outras ferramentas.</i></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </main>
 
@@ -837,7 +1092,7 @@
                 prompt += `**1. IDEIA CENTRAL E OBJETIVO**\n- **Nome do Aplicativo:** ${appName}\n- **Objetivo Principal:** ${appGoal}\n\n`;
 
                 const selectedFeatures = Array.from(document.querySelectorAll('#panels-container input[type="checkbox"]:checked'))
-                    .filter(cb => cb.closest('#general-structure-panel') === null && cb.closest('#layout-panel') === null)
+                    .filter(cb => cb.closest('#general-structure-panel') === null && cb.closest('#layout-panel') === null && cb.closest('#api-types-panel') === null)
                     .map(cb => `- ${cb.dataset.feature}`)
                     .join('\n');
 
@@ -914,13 +1169,71 @@
                     }
                 }
                 
+                let sectionCounter = 4;
+                
                 const selectedDBs = Array.from(document.querySelectorAll('#general-structure-panel input[type="checkbox"]:checked'))
                     .map(cb => `- ${cb.dataset.feature}`);
                 
                 if (selectedDBs.length > 0) {
-                    prompt += `\n**4. ESTRUTURA TÉCNICA (BACKEND E DADOS)**\n`;
+                    prompt += `\n**${sectionCounter}. ESTRUTURA TÉCNICA (BACKEND E DADOS)**\n`;
                     prompt += `O backend deverá ser construído utilizando a(s) seguinte(s) tecnologia(s) de banco de dados:\n`;
                     prompt += selectedDBs.join('\n');
+                    sectionCounter++;
+                }
+
+                const selectedAPIs = Array.from(document.querySelectorAll('#api-types-panel input[type="checkbox"]:checked'))
+                    .filter(cb => cb.dataset.feature.startsWith("Estilo de API:"))
+                    .map(cb => `- ${cb.dataset.feature}`);
+                
+                if (selectedAPIs.length > 0) {
+                    prompt += `\n**${sectionCounter}. TIPO DE API INTERNA**\n`;
+                    prompt += `A API interna principal do aplicativo deve seguir o(s) seguinte(s) estilo(s):\n`;
+                    prompt += selectedAPIs.join('\n');
+                    sectionCounter++;
+                }
+
+                const selectedAuthAPIs = Array.from(document.querySelectorAll('#api-types-panel input[type="checkbox"]:checked'))
+                    .filter(cb => cb.dataset.feature.startsWith("Login Social:") || cb.dataset.feature.startsWith("Auth-as-a-Service:"))
+                    .map(cb => `- ${cb.dataset.feature}`);
+
+                if (selectedAuthAPIs.length > 0) {
+                    prompt += `\n**${sectionCounter}. APIS DE AUTENTICAÇÃO E IDENTIDADE**\n`;
+                    prompt += `O sistema de autenticação deve integrar as seguintes opções:\n`;
+                    prompt += selectedAuthAPIs.join('\n');
+                    sectionCounter++;
+                }
+                
+                const selectedPaymentAPIs = Array.from(document.querySelectorAll('#api-types-panel input[type="checkbox"]:checked'))
+                    .filter(cb => cb.dataset.feature.startsWith("API de Pagamento:"))
+                    .map(cb => `- ${cb.dataset.feature}`);
+
+                if (selectedPaymentAPIs.length > 0) {
+                    prompt += `\n**${sectionCounter}. APIS DE PAGAMENTO**\n`;
+                    prompt += `O sistema deve integrar os seguintes gateways de pagamento:\n`;
+                    prompt += selectedPaymentAPIs.join('\n');
+                    sectionCounter++;
+                }
+
+                const selectedCommunicationAPIs = Array.from(document.querySelectorAll('#api-types-panel input[type="checkbox"]:checked'))
+                    .filter(cb => cb.dataset.feature.startsWith("API de Comunicação:"))
+                    .map(cb => `- ${cb.dataset.feature}`);
+
+                if (selectedCommunicationAPIs.length > 0) {
+                    prompt += `\n**${sectionCounter}. APIS DE COMUNICAÇÃO**\n`;
+                    prompt += `O sistema deve integrar os seguintes serviços de comunicação:\n`;
+                    prompt += selectedCommunicationAPIs.join('\n');
+                    sectionCounter++;
+                }
+
+                const selectedThirdPartyAPIs = Array.from(document.querySelectorAll('#api-types-panel input[type="checkbox"]:checked'))
+                    .filter(cb => cb.dataset.feature.startsWith("API de Terceiros:"))
+                    .map(cb => `- ${cb.dataset.feature}`);
+
+                if (selectedThirdPartyAPIs.length > 0) {
+                    prompt += `\n**${sectionCounter}. APIS DE SERVIÇOS DE TERCEIROS**\n`;
+                    prompt += `O sistema deve integrar as seguintes funcionalidades de terceiros:\n`;
+                    prompt += selectedThirdPartyAPIs.join('\n');
+                    sectionCounter++;
                 }
 
 
