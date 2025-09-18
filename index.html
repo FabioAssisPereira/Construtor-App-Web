@@ -65,6 +65,15 @@
                             <textarea id="app-goal" name="app-goal" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Ex: Conectar artesãos locais a compradores interessados em produtos únicos."></textarea>
                             <p class="text-sm text-gray-500 mt-1">Descreva em poucas palavras o que ele resolve ou faz.</p>
                         </div>
+                        <div class="border-t pt-4">
+                            <button id="generate-suggestions-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center hover:bg-indigo-700 transition-colors disabled:bg-indigo-300 disabled:cursor-not-allowed">
+                                <span class="btn-text">💡 Gerar Sugestões com IA</span>
+                                <svg class="animate-spin h-5 w-5 text-white ml-3 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -247,12 +256,66 @@
                             <label class="block text-lg font-medium text-gray-700 mb-2">Tema</label>
                             <div class="flex space-x-4">
                                 <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 flex-1 justify-center cursor-pointer">
-                                    <input type="radio" name="theme" value="claro" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" checked>
+                                    <input type="radio" id="theme-claro" name="theme" value="claro" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" checked>
                                     <span>☀️ Claro</span>
                                 </label>
                                 <label class="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50 flex-1 justify-center cursor-pointer">
-                                    <input type="radio" name="theme" value="escuro" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <input type="radio" id="theme-escuro" name="theme" value="escuro" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
                                     <span>🌙 Escuro</span>
+                                </label>
+                            </div>
+                        </div>
+                         <div class="border-t pt-6">
+                            <label class="block text-lg font-medium text-gray-700 mb-2">TIPOS DE DESIGN</label>
+                            <div class="space-y-3">
+                                <label class="flex items-start p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" id="design-minimalista" name="design-style" value="Minimalista" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 mt-1">
+                                    <span class="ml-3">
+                                        <span class="font-semibold">Minimalista:</span>
+                                        <i class="text-sm text-gray-500 ml-2 not-italic">"Crie um design minimalista, com fundo branco, fontes pretas e muito espaço livre."</i>
+                                    </span>
+                                </label>
+                                <label class="flex items-start p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" id="design-material" name="design-style" value="Material Design" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 mt-1">
+                                    <span class="ml-3">
+                                        <span class="font-semibold">Material Design:</span>
+                                        <i class="text-sm text-gray-500 ml-2 not-italic">"Use o Material Design do Google, com cards elevados, sombras sutis e cores vibrantes."</i>
+                                    </span>
+                                </label>
+                                <label class="flex items-start p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" id="design-flat" name="design-style" value="Moderno e Vibrante (Flat Design)" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 mt-1">
+                                    <span class="ml-3">
+                                        <span class="font-semibold">Moderno e Vibrante (Flat Design):</span>
+                                        <i class="text-sm text-gray-500 ml-2 not-italic">"Quero um design plano e moderno, sem sombras, usando cores fortes e ícones simples."</i>
+                                    </span>
+                                </label>
+                                <label class="flex items-start p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" id="design-dark" name="design-style" value="Sofisticado e Escuro (Dark Mode)" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 mt-1">
+                                    <span class="ml-3">
+                                        <span class="font-semibold">Sofisticado e Escuro (Dark Mode):</span>
+                                        <i class="text-sm text-gray-500 ml-2 not-italic">"Gere uma interface com tema escuro (dark mode), elegante, usando preto e cinza com detalhes em branco ou dourado."</i>
+                                    </span>
+                                </label>
+                                <label class="flex items-start p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" id="design-glass" name="design-style" value="Glassmorfismo" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 mt-1">
+                                    <span class="ml-3">
+                                        <span class="font-semibold">Glassmorfismo:</span>
+                                        <i class="text-sm text-gray-500 ml-2 not-italic">"Aplique o efeito de vidro fosco (glassmorphism) nos cards e no menu lateral."</i>
+                                    </span>
+                                </label>
+                                <label class="flex items-start p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" id="design-corp" name="design-style" value="Corporativo / Profissional" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 mt-1">
+                                    <span class="ml-3">
+                                        <span class="font-semibold">Corporativo / Profissional:</span>
+                                        <i class="text-sm text-gray-500 ml-2 not-italic">"Desenvolva um design corporativo, sério e profissional, usando tons de azul e cinza."</i>
+                                    </span>
+                                </label>
+                                <label class="flex items-start p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" id="design-fun" name="design-style" value="Divertido / Criativo" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 mt-1">
+                                    <span class="ml-3">
+                                        <span class="font-semibold">Divertido / Criativo:</span>
+                                        <i class="text-sm text-gray-500 ml-2 not-italic">"Crie uma interface divertida e criativa, com cores alegres, fontes arredondadas e ilustrações."</i>
+                                    </span>
                                 </label>
                             </div>
                         </div>
@@ -886,6 +949,9 @@
             const previewBody = document.getElementById('preview-body');
             const previewComponentsContainer = document.getElementById('preview-components-container');
             const previewFooter = document.getElementById('preview-footer');
+            const generateSuggestionsBtn = document.getElementById('generate-suggestions-btn');
+            const appNameInput = document.getElementById('app-name');
+            const appGoalInput = document.getElementById('app-goal');
 
             const previewComponents = {
                 'auth-forms': '<div class="preview-component" data-id="auth-forms"><div class="font-semibold">Login Form</div><div class="text-xs text-gray-500">Usuário, Senha</div></div>',
@@ -1105,10 +1171,15 @@
                 const footerColor = document.getElementById('footer-color').value;
                 const footerTextColor = document.getElementById('footer-text-color').value;
                 const theme = document.querySelector('input[name="theme"]:checked').value;
+                const designStyleRadio = document.querySelector('input[name="design-style"]:checked');
 
                 prompt += `**3. DESIGN E LAYOUT GERAL**\n`;
                 prompt += `- **Cores:**\n  - Primária: ${primaryColor}\n  - Secundária: ${secondaryColor}\n  - Destaque: ${accentColor}\n  - Fundo: ${backgroundColor}\n  - Rodapé: ${footerColor}\n  - Texto do Rodapé: ${footerTextColor}\n`;
                 prompt += `- **Tema:** ${theme.charAt(0).toUpperCase() + theme.slice(1)}\n`;
+                
+                if (designStyleRadio) {
+                    prompt += `- **Estilo de Design:** ${designStyleRadio.value}\n`;
+                }
 
                 if (document.getElementById('header-toggle').checked) {
                     prompt += `- **Cabeçalho (Header):**\n`;
@@ -1308,6 +1379,110 @@
                 }
             });
 
+            // Lógica para o botão de sugestões da IA
+            function checkIdeaInputs() {
+                generateSuggestionsBtn.disabled = !(appNameInput.value.trim() && appGoalInput.value.trim());
+            }
+            
+            appNameInput.addEventListener('input', checkIdeaInputs);
+            appGoalInput.addEventListener('input', checkIdeaInputs);
+
+            async function getAiSuggestions() {
+                const appName = appNameInput.value;
+                const appGoal = appGoalInput.value;
+
+                // 1. Coletar todas as funcionalidades disponíveis
+                const allFeatures = Array.from(document.querySelectorAll('input[data-feature]')).map(el => el.dataset.feature);
+
+                // 2. Montar o prompt para a IA (como descrito na solução)
+                const apiPrompt = `Você é um arquiteto de software especialista. Com base no nome do aplicativo ('${appName}') e no seu objetivo ('${appGoal}'), retorne um objeto JSON indicando quais das seguintes funcionalidades são recomendadas. Use true para recomendado e false para não recomendado. Responda apenas com o JSON. Funcionalidades disponíveis: ${JSON.stringify(allFeatures)}`;
+
+                console.log("Enviando para a IA (simulado):", apiPrompt);
+
+                // 3. SIMULAÇÃO da chamada à API
+                // Em um aplicativo real, aqui você faria a chamada `fetch` para a API do Gemini.
+                // Para este exemplo, vamos retornar uma resposta simulada após 2 segundos.
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        const mockResponse = {
+                            "Formulários de Autenticação": true,
+                            "Perfis e Contas": true,
+                            "Gestão de Produtos": true,
+                            "Painel do Lojista": true,
+                            "Catálogo de Produtos": true,
+                            "Gestão de Pedidos": true,
+                            "Busca Simples e Avançada": true,
+                            "Carrosséis de Destaques": true,
+                            "Cabeçalho (Header)": true,
+                            "Logotipo": true,
+                            "Menu de Navegação Principal": true,
+                            "Ícones de Ação (Perfil, Carrinho, etc.)": true,
+                            "Rodapé (Footer)": true,
+                            "Rodapé com Links Legais": true,
+                            "Rodapé com Redes Sociais": true,
+                            "Database: Firebase (BaaS)": true,
+                            "Estilo de API: REST": true,
+                            "Login Social: Google Sign-In": true,
+                            "API de Pagamento: Stripe": true,
+                            "API de Pagamento: Mercado Pago": true,
+                            "API de Comunicação: SendGrid": true,
+                            "API de Terceiros: Amazon S3": true,
+                            "Planos e Assinaturas": false, // Simulação: app de e-commerce simples não precisa de planos
+                        };
+                        console.log("Resposta da IA (simulada):", mockResponse);
+                        resolve(mockResponse);
+                    }, 2000);
+                });
+            }
+            
+            function applySuggestions(suggestions) {
+                 // Primeiro, desmarca todas as checkboxes para começar do zero
+                document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+                document.querySelectorAll('input[type="radio"][name="design-style"]').forEach(rb => rb.checked = false);
+
+                for (const feature in suggestions) {
+                    if (suggestions[feature] === true) {
+                        const checkbox = document.querySelector(`input[data-feature="${feature}"]`);
+                        if (checkbox) {
+                            checkbox.checked = true;
+                            // Se a checkbox estiver dentro de um container "escondido", mostra o container
+                            const parentToggleContainer = checkbox.closest('div[id$="-options-container"]');
+                            if (parentToggleContainer) {
+                                const toggleId = parentToggleContainer.id.replace('-options-container', '-toggle');
+                                const toggle = document.getElementById(toggleId);
+                                if (toggle && !toggle.checked) {
+                                    toggle.checked = true;
+                                    parentToggleContainer.classList.remove('hidden');
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            generateSuggestionsBtn.addEventListener('click', async () => {
+                const btnText = generateSuggestionsBtn.querySelector('.btn-text');
+                const spinner = generateSuggestionsBtn.querySelector('svg');
+
+                btnText.textContent = 'Analisando...';
+                spinner.classList.remove('hidden');
+                generateSuggestionsBtn.disabled = true;
+
+                try {
+                    const suggestions = await getAiSuggestions();
+                    applySuggestions(suggestions);
+                    updateApp(); // Atualiza a UI e o prompt com as novas seleções
+                } catch (error) {
+                    console.error("Erro ao obter sugestões da IA:", error);
+                    alert("Ocorreu um erro ao gerar as sugestões. Tente novamente.");
+                } finally {
+                     btnText.textContent = '💡 Gerar Sugestões com IA';
+                    spinner.classList.add('hidden');
+                    checkIdeaInputs(); // Re-habilita o botão se os inputs ainda estiverem preenchidos
+                }
+            });
+
+
             inputs.forEach(input => {
                 input.addEventListener('input', updateApp);
                 input.addEventListener('change', updateApp);
@@ -1335,6 +1510,7 @@
 
             // Inicialização
             loadConfigFromStorage();
+            checkIdeaInputs();
             updateApp();
         });
     </script>
