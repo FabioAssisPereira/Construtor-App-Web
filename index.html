@@ -1312,8 +1312,42 @@
                 return prompt;
             }
 
+            function resetForm() {
+                // Limpa caixas de texto
+                appNameInput.value = '';
+                appGoalInput.value = '';
+
+                // Desmarca todas as checkboxes
+                document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                    cb.checked = false;
+                });
+
+                // Desmarca todos os botões de rádio de estilo de design
+                document.querySelectorAll('input[name="design-style"]').forEach(rb => {
+                    rb.checked = false;
+                });
+                
+                // Define o tema padrão como 'claro'
+                document.getElementById('theme-claro').checked = true;
+
+                // Reseta as cores para o padrão F3F4F6
+                document.querySelectorAll('input[type="color"]').forEach(colorInput => {
+                    colorInput.value = '#f3f4f6';
+                });
+
+                // Esconde containers de opções
+                ['header', 'main-nav', 'main-content', 'sidebar', 'footer'].forEach(section => {
+                    const container = document.getElementById(`${section}-options-container`);
+                    if (container) {
+                        container.classList.add('hidden');
+                    }
+                });
+
+                updateApp();
+            }
+
             function updateApp() {
-                saveConfigToStorage();
+                // saveConfigToStorage(); // Persistência desativada para permitir o reset
                 promptOutput.textContent = generatePrompt();
 
                 const primaryColor = document.getElementById('primary-color').value;
@@ -1505,13 +1539,13 @@
                 setTimeout(() => {
                     copyButton.innerHTML = `<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> Copiar Prompt`;
                     copyButton.classList.replace('bg-blue-500', 'bg-green-500');
+                    resetForm();
                 }, 2000);
             });
 
             // Inicialização
-            loadConfigFromStorage();
             checkIdeaInputs();
-            updateApp();
+            resetForm();
         });
     </script>
 </body>
